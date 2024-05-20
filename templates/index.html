@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Task Manager</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <!--Icon made by IYAHICON from www.flaticon.com-->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.png">
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/home.css'>
+    <script src='/static/home.js'></script>
+
+</head>
+<body>
+    <!--Day of the week selector-->
+    <aside id="week">
+        {% include 'week.html' %}
+    </aside>
+
+    <section>
+        <!--All the tasks-->
+        <div id="tasks">
+            {% include 'tasks.html' %}
+        </div>
+
+        <!--Configurations-->
+        <div id="config">
+            {% include 'config.html' %}
+        </div>
+    </section>
+
+    <!--New Task screen-->
+    <div id="new-task" class="block-screen">
+        {% include 'new_task.html' %}
+    </div>
+
+    <!--Edit Task screen-->
+    <div id="edit-task" class="block-screen">
+        {% include 'edit_task.html' %}
+    </div>
+</body>
+</html>

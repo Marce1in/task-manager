@@ -1,0 +1,358 @@
+* {
+    margin: 2px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: #B388FF;
+    user-select: none;
+}
+
+body{
+    display: flex;
+    background-color: rgb(24,24,24);
+}
+button{
+    background-color: rgb(48, 48, 48);
+    color: rgb(179, 136, 255);
+
+    border: 1.75px solid rgb(179, 136, 255);
+    border-radius: 12px;
+
+    transition: background-color 0.3s,
+                color 0.3s;
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgb(179, 136, 255);
+    color: rgb(48, 48, 48);
+}
+input::placeholder {
+    text-align: center;
+}
+
+.success{
+    background-color: rgb(50, 65, 50) !important;
+}
+
+/*Everything about the week bar*/
+aside{
+    height: 97vh;
+    min-width: 250px;
+    max-width: 250px;
+
+    flex-grow: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+
+    overflow: hidden;
+    overflow-y: auto;
+
+    background-color: rgb(36,36,36);
+
+    border: 2px solid rgb(48, 48, 48);
+    border-radius: 8px;
+
+    transition: height 1s;
+}
+@media only screen and (max-height: 640px) {
+    aside{
+        justify-content: normal;
+    }
+}
+.active{
+    background-color: rgb(179, 136, 255) !important;
+    color: rgb(48, 48, 48) !important;
+}
+
+aside button{
+    margin: 10px;
+
+    max-width: 225px;
+    width: 100%;
+    height: 4.5rem;
+
+    font-size: xx-large;
+}
+.show{
+    visibility: visible;
+    height: 97vh;
+}
+/*End*/
+
+/*Task Bar conteiner and the config menu*/
+section{
+    display: flex;
+    flex-grow: 1;
+
+    height: 97vh;
+
+}
+/*End*/
+
+
+/*Everything about the Task Bar*/
+#tutorial{
+    display: block;
+    margin: auto;
+    width: 98%;
+
+    transform: translateY(100%);
+
+    color:rgba(180, 136, 255, 0.281);
+
+    text-align: center;
+    font-size: xx-large;
+
+}
+
+#tasks{
+    flex-grow: 3;
+
+    overflow-y: auto;
+}
+#tasks div{
+    display: flex;
+    justify-content: space-between;
+
+    min-height: 150px;
+
+    font-size: x-large;
+
+    margin-bottom: 9px;
+
+    color: rgb(179, 136, 255);
+    background-color: rgb(36, 36, 36);
+
+    border: 1.75px solid rgb(179, 136, 255);
+    border-radius: 8px;
+
+    transition: background-color 0.2s;
+}
+#tasks div:hover{
+    background-color: rgb(48, 48, 48);
+}
+.task-name{
+    align-self: center;
+    flex-grow: 1;
+
+    overflow-wrap: anywhere;
+    font-size: 40px;
+
+}
+.edit{
+
+    font-size: x-large;
+
+    min-height: 30px;
+    max-height: 30px;
+
+    min-width: 30px;
+    max-width: 30px;
+
+    border-radius: 100%;
+    background-color: inherit;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-date{
+    transform: translateY(2.5px);
+
+}
+.checkmark{
+    align-self: center;
+
+
+    min-height: 35px;
+    min-width: 35px;
+
+}
+/*End*/
+
+
+/*Everything about the Config bar and the Task creator*/
+#config{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    height: auto;
+}
+#config button{
+    margin: 10px;
+
+    height: 2rem;
+    max-width: 90%;
+    width: 100%;
+
+    font-size: x-large;
+}
+
+/*Hamburguer menu that only turn on in screens smallers then 900px*/
+#hamburguer{
+    display: none;
+}
+
+/*Pop-up Menu*/
+.block-screen{
+    display: none;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(12,12,12, 0.6);
+
+}
+.pop-conteiner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-between;
+
+    min-width: 300px;
+    min-height: 250px;
+
+    background-color: rgb(24,24,24);
+    border: 2px solid rgb(48, 48, 48);
+}
+.pop-conteiner button{
+    font-size: x-large;
+}
+.close{
+    align-self: self-end;
+
+    border-radius: 100%;
+
+    height: 30px;
+    width: 30px;
+}
+.pop-conteiner input{
+    background-color: rgb(48,48,48);
+    font-size: x-large;
+    border: 2px solid #B388FF;
+    border-radius: 12px;
+}
+
+/*Dropdown Menu*/
+#dropdown{
+    display:none;
+
+    max-width: 90%;
+    width: 100%;
+}
+/*Class that makes the hidden menus appear*/
+.open{
+    display: flex !important;
+    flex-direction: column;
+}
+#dropdown > button{
+    height: auto;
+}
+/*End*/
+
+/*Prepare the site for screen smallers then 900px*/
+@media only screen and (max-width: 900px) {
+    body{
+        flex-direction: column;
+    }
+
+    aside{
+        max-width: none;
+        visibility: hidden;
+        height: 0;
+    }
+    aside button{
+        max-width: 500px;
+    }
+    .show{
+        height: 800px;
+    }
+    #hamburguer{
+        display: block;
+    }
+
+    section{
+        flex-direction: column-reverse;
+    }
+    #config button{
+        max-width: 60vw;
+    }
+    #dropdown{
+        width: 45vw
+    }
+}
+
+/*Custom Checkbox from https://moderncss.dev/pure-css-custom-checkbox-style/ */
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: var(--form-background);
+    /* Not removed via appearance */
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    min-width: 2em;
+    min-height: 2em;
+    border: 0.15em solid currentColor;
+    border-radius: 100%;
+    transform: translateY(-0.075em);
+
+    margin-left: 30px;
+    margin-right: 30px;
+    display: grid;
+    place-content: center;
+
+    cursor:pointer;
+
+    transition: 0.15s background-color ease-in-out;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+
+    min-width: 1em;
+    min-height: 1em;
+
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+
+    box-shadow: inset 1em 1em var(--form-control-color);
+
+    transition: 0.15s transform ease-in-out;
+    /* Windows High Contrast Mode */
+    background-color: rgb(179, 136, 255);
+}
+
+input[type="checkbox"]:checked::before {
+    background-color: rgb(50, 75, 50);
+    transform: scale(1);
+}
+
+input[type="checkbox"]:disabled {
+    --form-control-color: var(--form-control-disabled);
+
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+}
+input[type="checkbox"]:checked{
+    background-color: #B388FF;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <!--Icon made by IYAHICON from www.flaticon.com-->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.png">
+    <link href="/static/account.css" rel="stylesheet">
+
+    <title>{% block title %}{% endblock %}</title>
+
+</head>
+<body>
+    {%if error != None%}
+    <div class="error">
+        {{error}}
+    </div>
+    {% endif %}
+    <div>
+        {%block form%}{% endblock%}
+    </div>
+</body>
+<html>

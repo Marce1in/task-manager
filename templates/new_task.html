@@ -1,0 +1,21 @@
+<div class="pop-conteiner">
+
+    <button class="close" onclick="add_class(document.getElementById('new-task'), 'open');">
+        X
+    </button>
+
+    Name
+
+    <input type="text" maxlength="20" name="name" placeholder="Task Name"><br>
+
+    Expiration Date
+
+    <input type="time"><br>
+
+    <input id="day" type="hidden" value="{{day}}">
+
+    <button onclick="create_task(this.parentElement.children); add_class(document.getElementById('new-task'), 'open');">
+        Create
+    </button>
+
+</div>

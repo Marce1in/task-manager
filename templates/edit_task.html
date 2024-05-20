@@ -1,0 +1,25 @@
+<div class="pop-conteiner">
+
+    <button class="close" onclick="add_class(document.getElementById('edit-task'), 'open');">
+        X
+    </button>
+
+    Name
+
+    <input type="text" maxlength="20" name="name" placeholder="Task Name"><br>
+
+    Expiration Date
+
+    <input type="time"><br>
+
+    <input type="hidden" value="">
+
+    <button onclick="edit_task(this.parentElement.children, task_element); add_class(document.getElementById('edit-task'), 'open');">
+        Edit
+    </button>
+
+    <button onclick="delete_task(task_element); add_class(document.getElementById('edit-task'), 'open')">
+        Delete Task
+    </button>
+
+</div>

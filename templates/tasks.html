@@ -1,0 +1,18 @@
+{%if tasks != []%}
+    {% for task in tasks%}
+        <div class="{%if task.state == 1%}success{%endif%}">
+
+            <input autocomplete="off" type="checkbox" {%if task.state == 1%}checked{%endif%} class="checkmark" onclick="conclude_task(this.parentElement, 'success');">
+
+            <span class="task-name">{{task.name}}</span>
+
+            <span class="task-date">{{task.date}}</span>
+
+            <input type="hidden" value="{{task.id}}">
+
+            <button class="edit" onclick="add_class(document.getElementById('edit-task'), 'open'); task_element = this.parentElement">⚙</button>
+        </div>
+    {% endfor %}
+{%else%}
+    <span id="tutorial">Don't have any tasks? <br> Create one in the "New Task" button!<span>
+{%endif%}

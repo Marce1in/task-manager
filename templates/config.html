@@ -1,0 +1,20 @@
+<button id="hamburguer" onclick="add_class(document.getElementById('week'), 'show')">
+    ☰
+</button>
+
+<button onclick="add_class(document.getElementById('dropdown'), 'open')">
+    Settings
+</button>
+
+<div id="dropdown">
+    <button onclick="location.href='/login'">
+        Logout
+    </button>
+    <button onclick="delete_all()">
+        Delete All
+    </button>
+</div>
+
+<button onclick="add_class(document.getElementById('new-task'), 'open')">
+    New Task
+</button>

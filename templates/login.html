@@ -1,0 +1,21 @@
+{%extends "account-layout.html" %}
+
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block form %}
+<form method='POST' action='/login'>
+
+    <label for='name'>Name</label>
+    <input id='name' required type='text' name='name'>
+    
+    <label for='password'>Password</label>
+    <input id='password' required type='password' name='password'>
+    
+    <input type='submit' value='Login'>
+    <span>Don't have a account? <a href="register">Register!<a></span>
+
+</form>
+{% endblock %}
