@@ -10,7 +10,7 @@ def init_db():
     connection = sqlite3.connect("database/task.db")
     cursor = connection.cursor()
 
-    with open("schema.sql") as schema:
+    with open("database/schema.sql") as schema:
         cursor.executescript(schema.read())
 
     cursor.close()
