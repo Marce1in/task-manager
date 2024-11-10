@@ -8,6 +8,7 @@
 Ensure that you have *python*, *git* and *docker* installed.
 
 #### running pulling the image from docker hub
+***WARNING**: THE DATABASE THIS DOCKER IMAGE USES IS SQLITE NOT MARIADB / MYSQL*
 - run in the terminal <br>
 `docker run -dp 127.0.0.1:8080:8080 -e SKEY="*your secret key*" -v task.db:/app/database marce1in/flask-task-manager`
 

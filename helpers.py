@@ -1,6 +1,8 @@
-from flask import Flask, redirect, session
+from flask import redirect, session, Request
 from functools import wraps
-import sqlite3
+import mysql.connector
+from mysql.connector.cursor import MySQLCursorDict
+import os
 
 # Check if the user is logged
 def login_required(func):
@@ -15,9 +17,17 @@ def login_required(func):
 def handle_db(func):
     @wraps(func)
     def inner(*args, **kwargs):
-        connection = sqlite3.connect("database/task.db")  
-        connection.row_factory = sqlite3.Row
-        cursor = connection.cursor()
+        connection = mysql.connector.connect(
+            host=os.environ["DB_HOST"],
+            port=os.environ["DB_PORT"],
+            user=os.environ["DB_USER"],
+            password=os.environ["DB_PASSWD"],
+            database=os.environ["DB_DATABASE"],
+            charset="utf8mb4",
+            collation="utf8mb4_general_ci",
+        )
+
+        cursor = connection.cursor(dictionary=True)
 
         result = func(*args, cursor=cursor, **kwargs)
 
@@ -29,9 +39,13 @@ def handle_db(func):
     return inner
 
 # Check if the user is the real owner of the task
-def task_own(cursor: sqlite3.Cursor, request: Flask.request_class):
-    task_user_id = cursor.execute("SELECT user_id FROM tasks WHERE id = ?", (request.get_json()["id"], )).fetchone()
-    if task_user_id["user_id"] != session['user_id']:
+def task_own(cursor: MySQLCursorDict, request: Request):
+    cursor.execute("SELECT user_id FROM tasks WHERE id = %s", (request.get_json()["id"], ))
+    task_user_id = cursor.fetchone()
+
+    if task_user_id is None:
+        return False
+    elif task_user_id["user_id"] != session['user_id']:
         return False
     else:
         return True

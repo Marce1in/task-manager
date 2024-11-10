@@ -2,6 +2,8 @@ database/*db*
 /__pycache__
 /.venv
 /.git
+/venv
+.env.example
 .gitignore
 .dockerignore
 Dockerfile
