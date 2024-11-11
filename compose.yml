@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+
+  database:
+
+    container_name: flask_task_manager_database
+
+    image: mysql:9.1.0-oraclelinux9
+    networks:
+      - flask_task_manager_network
+    restart: always
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWD}"
+      MYSQL_ONETIME_PASSWORD: "yes"
+    volumes:
+      - flask_task_manager_volume:/var/lib/mysql
+
+  backend:
+
+    container_name: flask_task_manager_app
+
+    build:
+      context: .
+      target: dev
+
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/venv
+    networks:
+      - flask_task_manager_network
+    depends_on:
+      wait-for-db:
+        condition: service_completed_successfully
+
+  wait-for-db:
+
+    container_name: flask_task_manager_health
+    image: atkrad/wait4x
+    networks:
+      - flask_task_manager_network
+    depends_on:
+      - database
+    command: tcp database:3306 -t 30s -i 250ms
+
+networks:
+  flask_task_manager_network:
+volumes:
+  flask_task_manager_volume:

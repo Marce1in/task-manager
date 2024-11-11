@@ -288,3 +288,8 @@ def deleteall(cursor: MySQLCursorDict):
     cursor.execute("DELETE FROM tasks WHERE week = %s AND user_id = %s", (day, session['user_id']))
 
     return jsonify({'status': 'success'}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True,
+            host=os.environ["SERVER_HOST"],
+            port=int(os.environ["SERVER_PORT"]))
