@@ -6,5 +6,6 @@ compose*
 .env.example
 .gitignore
 .dockerignore
+compose.yml
 Dockerfile
 README.md

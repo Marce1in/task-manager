@@ -13,6 +13,26 @@ def login_required(func):
         return func(*args, **kwargs)
     return inner
 
+# If the database is still not created or empty we create her
+def init_db():
+    connection = mysql.connector.connect(
+        host=os.environ["DB_HOST"],
+        port=os.environ["DB_PORT"],
+        user=os.environ["DB_USER"],
+        password=os.environ["DB_PASSWD"],
+        database=os.environ["DB_DATABASE"],
+        charset="utf8mb4",
+        collation="utf8mb4_general_ci",
+    )
+    cursor = connection.cursor()
+
+    with open("database/schema.sql") as schema:
+        cursor.execute(schema.read(), multi=True)
+
+    cursor.close()
+    connection.close()
+
+
 # Create a connection between the database and ensure that the database is closed safetly
 def handle_db(func):
     @wraps(func)

@@ -1,33 +1,13 @@
 from flask import Flask, render_template, request, session, redirect, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import login_required, handle_db, task_own
+from helpers import login_required, handle_db, task_own, init_db
 from datetime import datetime
-import mysql.connector
 from mysql.connector.cursor import MySQLCursorDict
 from dotenv import load_dotenv
 import os
 
 # Load .env
 load_dotenv()
-
-# If the database is still not created or empty we create her
-def init_db():
-    connection = mysql.connector.connect(
-        host=os.environ["DB_HOST"],
-        port=os.environ["DB_PORT"],
-        user=os.environ["DB_USER"],
-        password=os.environ["DB_PASSWD"],
-        database=os.environ["DB_DATABASE"],
-        charset="utf8mb4",
-        collation="utf8mb4_general_ci",
-    )
-    cursor = connection.cursor()
-
-    with open("database/schema.sql") as schema:
-        cursor.execute(schema.read(), multi=True)
-
-    cursor.close()
-    connection.close()
 
 app = Flask(__name__)
 

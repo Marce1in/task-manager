@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   database:
@@ -18,6 +16,7 @@ services:
       MYSQL_ONETIME_PASSWORD: "yes"
     volumes:
       - flask_task_manager_volume:/var/lib/mysql
+      - ./database/:/docker-entrypoint-initdb.d/
 
   backend:
 
@@ -48,7 +47,7 @@ services:
       - flask_task_manager_network
     depends_on:
       - database
-    command: tcp database:3306 -t 30s -i 250ms
+    command: tcp database:3306 -t 60s -i 250ms
 
 networks:
   flask_task_manager_network:
