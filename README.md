@@ -5,60 +5,77 @@
 
 ## Runnning:
 
-Ensure that you have *python*, *git* and *docker* installed.
+Ensure that you have *Git* and *Docker* installed.
 
-#### running pulling the image from docker hub
-***WARNING**: THE DATABASE THIS DOCKER IMAGE USES IS SQLITE NOT MARIADB / MYSQL*
+### Running pulling the image from docker hub
+***WARNING**: The database that this docker image uses is SQLite3  , not MariaDB or MySQL*
 - run in the terminal <br>
 `docker run -dp 127.0.0.1:8080:8080 -e SKEY="*your secret key*" -v task.db:/app/database marce1in/flask-task-manager`
 
 Now acess **127.0.0.1:8080** in your browser, also don't forget to change your secret key ;)
-#### running building the image locally
+### Running using docker compose
 - Clone this repository <br>
 `git clone git@github.com:Marce1in/task-manager.git`
 
 - cd into the directory <br>
 `cd task-manager`
 
-- Build your image <br>
-`docker build -t task-manager .`
+- Create a *.env* file using *.env.example* as a base, don't forget to change the variables for your use case <br> <br>
+  **WARNING**: Don't forget to read the warnings in the .env.example!
+  - ###### On Unix Systems (Linux, Mac)
+    `cp .env.example .env`
+  - ###### On Windows
+    `copy .env.example .env`
 
-- run your container <br>
-`docker run -d -p 127.0.0.1:8080:8080 -e SKEY="*your secret key*" -v task.db:/app/database task-manager`
+- Use docker compose to start the services <br>
+`docker compose up`
 
-Now you can acess **127.0.0.1:8080** in your browser.
-#### running locally
+Now you can acess **127.0.0.1:$SERVER_PORT** in your browser.
+### Running locally
 - Clone this repository <br>
 `git clone git@github.com:Marce1in/task-manager.git`
 
 - cd into the directory <br>
 `cd task-manage`
 
+- Create a *.env* file using *.env.example* as a base, don't forget to change the variables for your use case <br> <br>
+  **WARNING**: Don't forget to read the warnings in the .env.example!
+  - ###### On Unix Systems (Linux, Mac)
+    `cp .env.example .env`
+  - ###### On Windows
+    `copy .env.example .env`
+
+- Ensure that you have _MySQL_ or _MariaDB_ installed
+
+- Generate a database with the same name you specified in _.env_ <br>
+`mysql -u $DB_USER -p -e "CREATE DATABASE $DB_DATABASE;`
+
+- Ensure that you have *python* installed
+
 - ###### On Unix Systems (Linux, Mac, BSD)
   - Create a virtual environment <br>
-  `python3 -m venv .venv`
+  `python3 -m venv venv`
 
   - Activate the environment <br>
-  `source ./.venv/bin/activate`
+  `source ./venv/bin/activate`
 
 - ###### On Windows
   - Create a virtual environment <br>
-  `python -m venv .venv`
+  `python -m venv venv`
 
   - Activate the environment <br>
-  `.\.venv\Scripts\activate`
+  `.\venv\Scripts\activate`
 
 - Install the dependencies <br>
 `pip install -r requirements.txt`
 
-- running for development
-  - `flask run`
-- running for production
-  - `waitress-serve --host *your host* --port *your port* app:app`
+- Start the server <br>
+`python app.py`
 
+Now you can acess **127.0.0.1:$SERVER_PORT** in your browser.
 # Especification
 ## The back-end:
-The back-end is created using Flask and SQLite3 as the database.<br>
+The back-end is created using Flask and MySQL as the database.<br>
 
 ### The database
 Before we delve into anything else, it's crucial to understand how the database operates.
