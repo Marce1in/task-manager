@@ -15,8 +15,8 @@ services:
       MYSQL_ROOT_PASSWORD: "${DB_PASSWD}"
       MYSQL_ONETIME_PASSWORD: "yes"
     volumes:
-      - flask_task_manager_volume:/var/lib/mysql
-      - ./database/:/docker-entrypoint-initdb.d/
+      - flask_task_manager_volume:/var/lib/mysql:z
+      - ./database/:/docker-entrypoint-initdb.d/:z
 
   backend:
 
